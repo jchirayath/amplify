@@ -1,0 +1,85 @@
+{
+  "auth": {
+    "serverlessapp37274a4b37274a4b": {
+      "customAuth": false,
+      "dependsOn": [
+        {
+          "attributes": [
+            "Arn",
+            "Name"
+          ],
+          "category": "function",
+          "resourceName": "serverlessapp37274a4b37274a4bPostConfirmation",
+          "triggerProvider": "Cognito"
+        }
+      ],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL",
+          "NAME"
+        ],
+        "socialProviders": [
+          "FACEBOOK",
+          "GOOGLE"
+        ],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito"
+    }
+  },
+  "function": {
+    "serverlessapp37274a4b37274a4bPostConfirmation": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_auth_serverlessapp37274a4b37274a4b_facebookAppId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "serverlessapp37274a4b37274a4b"
+        }
+      ]
+    },
+    "AMPLIFY_auth_serverlessapp37274a4b37274a4b_googleClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "serverlessapp37274a4b37274a4b"
+        }
+      ]
+    },
+    "AMPLIFY_function_serverlessapp37274a4b37274a4bPostConfirmation_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "serverlessapp37274a4b37274a4bPostConfirmation"
+        }
+      ]
+    },
+    "AMPLIFY_function_serverlessapp37274a4b37274a4bPostConfirmation_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "serverlessapp37274a4b37274a4bPostConfirmation"
+        }
+      ]
+    }
+  }
+}
