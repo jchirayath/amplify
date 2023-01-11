@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { CognitoHostedUIIdentityProvider } from "@aws-amplify/auth";
 import { Auth, Hub } from "aws-amplify";
 
 export const AuthContext = React.createContext({
@@ -8,12 +9,14 @@ export const AuthContext = React.createContext({
         password: null,
     },
     userLoading: true,
-    signIn: async () => Promise,
+    signIn: async (p: { password: string; email: string }) => Promise,
     signOut: async () => Promise,
     signUp: async (p: { firstName: string; lastName: string; password: string; email: string }) => Promise,
     confirmAccount: async (p: { confirmCode: string }) => Promise,
     sendPasswordResetMail: async () => Promise,
     resendConfirmCode: () => {},
+    signInWithGoogle: async (event: any) => Promise,
+    signInWithFacebook: async (event: any) => Promise,
 });
 
 export const AuthProvider = ({ children }: any) => {
@@ -87,7 +90,7 @@ export const AuthProvider = ({ children }: any) => {
      * @param password
      */
     const signIn = async ({ email, password }: {email: string, password: string}) => {
-        await Auth.signIn({ username: email, password });
+        await Auth.signIn({username: email, password});
     };
 
     /**
@@ -140,6 +143,28 @@ export const AuthProvider = ({ children }: any) => {
      */
     const sendPasswordResetMail = async ({ email }: {email: string}) => Auth.forgotPassword(email);
 
+    const signInWithGoogle = async (event: any) => {
+        event?.preventDefault();
+        try {
+            await Auth.federatedSignIn({
+                provider: CognitoHostedUIIdentityProvider.Google,
+            });
+        } catch (err) {
+            console.error("Auth Error: ", err);
+        }
+    }
+
+    const signInWithFacebook = async (event: any) => {
+        event?.preventDefault();
+        try {
+            await Auth.federatedSignIn({
+                provider: CognitoHostedUIIdentityProvider.Facebook,
+            });
+        } catch (err) {
+            console.error("Auth Error: ", err);
+        }
+    }
+
     const value: any = {
         user,
         unverifiedAccount,
@@ -150,6 +175,8 @@ export const AuthProvider = ({ children }: any) => {
         confirmAccount,
         sendPasswordResetMail,
         resendConfirmCode,
+        signInWithGoogle,
+        signInWithFacebook,
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

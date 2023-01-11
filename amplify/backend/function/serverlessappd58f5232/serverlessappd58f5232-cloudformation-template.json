@@ -2,46 +2,21 @@
   "AWSTemplateFormatVersion": "2010-09-09",
   "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"10.6.1\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
   "Parameters": {
-    "GROUP": {
+    "CloudWatchRule": {
       "Type": "String",
-      "Default": ""
-    },
-    "modules": {
-      "Type": "String",
-      "Default": "",
-      "Description": "Comma-delimited list of modules to be executed by a lambda trigger. Sent to resource as an env variable."
-    },
-    "resourceName": {
-      "Type": "String",
-      "Default": ""
-    },
-    "trigger": {
-      "Type": "String",
-      "Default": "true"
-    },
-    "functionName": {
-      "Type": "String",
-      "Default": ""
-    },
-    "roleName": {
-      "Type": "String",
-      "Default": ""
-    },
-    "parentResource": {
-      "Type": "String",
-      "Default": ""
-    },
-    "parentStack": {
-      "Type": "String",
-      "Default": ""
-    },
-    "env": {
-      "Type": "String"
+      "Default": "NONE",
+      "Description": " Schedule Expression"
     },
     "deploymentBucketName": {
       "Type": "String"
     },
+    "env": {
+      "Type": "String"
+    },
     "s3Key": {
+      "Type": "String"
+    },
+    "userstable": {
       "Type": "String"
     },
     "apiserverlessappGraphQLAPIIdOutput": {
@@ -75,16 +50,24 @@
         "aws:asset:property": "Code"
       },
       "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": {
+            "Ref": "s3Key"
+          }
+        },
         "Handler": "index.handler",
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "serverlessapp37274a4b37274a4bPostConfirmation",
+            "serverlessappd58f5232",
             {
               "Fn::Join": [
                 "",
                 [
-                  "serverlessapp37274a4b37274a4bPostConfirmation",
+                  "serverlessappd58f5232",
                   "-",
                   {
                     "Ref": "env"
@@ -99,14 +82,8 @@
             "ENV": {
               "Ref": "env"
             },
-            "MODULES": {
-              "Ref": "modules"
-            },
             "REGION": {
               "Ref": "AWS::Region"
-            },
-            "GROUP": {
-              "Ref": "GROUP"
             },
             "API_SERVERLESSAPP_GRAPHQLAPIIDOUTPUT": {
               "Ref": "apiserverlessappGraphQLAPIIdOutput"
@@ -116,6 +93,9 @@
             },
             "API_SERVERLESSAPP_GRAPHQLAPIKEYOUTPUT": {
               "Ref": "apiserverlessappGraphQLAPIKeyOutput"
+            },
+            "USERSTABLE": {
+              "Ref": "userstable"
             }
           }
         },
@@ -126,15 +106,8 @@
           ]
         },
         "Runtime": "nodejs14.x",
-        "Timeout": 25,
-        "Code": {
-          "S3Bucket": {
-            "Ref": "deploymentBucketName"
-          },
-          "S3Key": {
-            "Ref": "s3Key"
-          }
-        }
+        "Layers": [],
+        "Timeout": 25
       }
     },
     "LambdaExecutionRole": {
@@ -143,12 +116,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "serverlessapp37274a4b37274a4bPostConfirmation",
+            "serverlessappLambdaRole9834a757",
             {
               "Fn::Join": [
                 "",
                 [
-                  "serverlessapp37274a4b37274a4bPostConfirmation",
+                  "serverlessappLambdaRole9834a757",
                   "-",
                   {
                     "Ref": "env"
@@ -321,6 +294,11 @@
         ]
       }
     },
+    "Region": {
+      "Value": {
+        "Ref": "AWS::Region"
+      }
+    },
     "LambdaExecutionRole": {
       "Value": {
         "Ref": "LambdaExecutionRole"
@@ -332,11 +310,6 @@
           "LambdaExecutionRole",
           "Arn"
         ]
-      }
-    },
-    "Region": {
-      "Value": {
-        "Ref": "AWS::Region"
       }
     }
   }

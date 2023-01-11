@@ -1,5 +1,5 @@
 // pages
-import Dashboard from "./pages/Dashboard";
+import DashboardLayout from "./components/DashboardLayout";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 
@@ -17,13 +17,6 @@ interface Route {
 
 export const routes: Array<Route> = [
     {
-        key: 'dashboard-route',
-        title: 'Home',
-        path: '/',
-        enabled: true,
-        component: Dashboard
-    },
-    {
         key: 'signin-route',
         title: 'Sign In',
         path: '/signin',
@@ -36,5 +29,12 @@ export const routes: Array<Route> = [
         path: '/signup',
         enabled: true,
         component: SignUp
-    }
+    },
+    {
+        key: 'dashboard-route',
+        title: 'Home',
+        path: '/*',
+        enabled: true,
+        component: DashboardLayout
+    },
 ]

@@ -13,5 +13,14 @@
   "triggerEventPath": "PostConfirmation.event.json",
   "roleName": "serverlessapp37274a4b37274a4bPostConfirmation",
   "skipEdit": true,
-  "enableCors": false
+  "enableCors": false,
+  "permissions": {
+    "api": {
+      "serverlessapp": [
+        "Query",
+        "Mutation",
+        "Subscription"
+      ]
+    }
+  }
 }

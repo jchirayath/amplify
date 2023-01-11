@@ -1,0 +1,55 @@
+input AMPLIFY {
+  globalAuthRule: AuthRule = {allow: public}
+}
+
+input CreateUsersInput {
+  id: String!
+  name: String!
+  email: String!
+}
+
+type Users {
+  id: String!
+  name: String!
+  email: String!
+}
+
+type Product @model {
+  id: ID!
+  leftWidth: Float!
+  leftLength: Float!
+  leftHeight: Float!
+  leftLogo: String!
+  rightWidth: Float!
+  rightLength: Float!
+  rightHeight: Float!
+  rightLogo: String!
+  fileKey: String
+}
+
+input UpdateUsersInput {
+  id: String!
+  name: String
+  email: String
+}
+
+type Mutation {
+  deleteUsers(id: String!): Users
+  createUsers(createUsersInput: CreateUsersInput!): Users
+  updateUsers(updateUsersInput: UpdateUsersInput!): Users
+}
+
+type Query {
+  getUsers(id: String!): Users
+  listUserss: [Users]
+}
+
+type Subscription {
+  onCreateUsers: Users @aws_subscribe(mutations: ["createUsers"])
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}

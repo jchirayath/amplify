@@ -21,9 +21,9 @@ import useAuth from "../hooks/useAuth";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import Divider from "@mui/material/Divider";
+import { useEffect } from "react";
 
 export default function SignUp() {
-  const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [confirmMode, setConfirmMode] = React.useState(false);
 
   const navigate = useNavigate();
@@ -39,6 +39,12 @@ export default function SignUp() {
       .min(8, "Password should be of minimum 8 characters length")
       .required("Password is required"),
   });
+
+  useEffect(() => {
+    if (user) {
+      navigate("/", { replace: true });
+    }
+  }, [user]);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -72,7 +78,7 @@ export default function SignUp() {
               { setErrors, setStatus, setSubmitting }: any
             ): Promise<void> => {
               try {
-                setIsSubmitting(true);
+                setSubmitting(true);
                 await signUp({
                   email: values.email,
                   password: values.password,
@@ -80,7 +86,7 @@ export default function SignUp() {
                   lastName: values.lastName,
                 });
                 setConfirmMode(true);
-                setIsSubmitting(false);
+                setSubmitting(false);
               } catch (err: any) {
                 setStatus({ success: false });
                 setErrors({ submit: err.message });
@@ -90,7 +96,6 @@ export default function SignUp() {
           >
             {({
               errors,
-              handleBlur,
               handleChange,
               handleSubmit,
               isSubmitting,
@@ -208,19 +213,21 @@ export default function SignUp() {
                 submit: null,
               }}
               validationSchema={Yup.object({
-                code: Yup.string().min(6, "Confirmation Code should contain 6 characters").required("Code is required"),
+                code: Yup.string()
+                  .min(6, "Confirmation Code should contain 6 characters")
+                  .required("Code is required"),
               })}
               onSubmit={async (
                 values: any,
                 { setErrors, setStatus, setSubmitting }: any
               ): Promise<void> => {
                 try {
-                  setIsSubmitting(true);
+                  setSubmitting(true);
                   // confirm sign up
                   await confirmAccount({ confirmCode: values?.code });
                   // navigate to dashboard
                   navigate("/", { replace: true });
-                  setIsSubmitting(false);
+                  setSubmitting(false);
                 } catch (err: any) {
                   setStatus({ success: false });
                   setErrors({ submit: err.message });
@@ -230,7 +237,6 @@ export default function SignUp() {
             >
               {({
                 errors,
-                handleBlur,
                 handleChange,
                 handleSubmit,
                 isSubmitting,

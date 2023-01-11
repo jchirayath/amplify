@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "api": {
+      "serverlessapp": [
+        "Query",
+        "Mutation",
+        "Subscription"
+      ]
+    }
+  },
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "userstable",
+      "environmentVariableName": "USERSTABLE"
+    }
+  ]
+}
