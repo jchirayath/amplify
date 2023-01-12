@@ -37,6 +37,12 @@
           "rdsSecretStoreArn": "arn:aws:secretsmanager:us-east-1:518248239491:secret:rds-db-credentials/cluster-C2INBSGX3FCO3C4I7BVL3HZSSY/admin/1673439636727-6341zI",
           "rdsDatabaseName": "DemoDatabase"
         }
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d29thsukvcvws1",
+          "type": "manual"
+        }
       }
     }
   }

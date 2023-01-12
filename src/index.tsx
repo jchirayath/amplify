@@ -22,7 +22,7 @@ const isLocalhost = Boolean(
 );
 
 const localRedirect = "http://localhost:3000/";
-const productionRedirect = "https://master.d29thsukvcvws1.amp/";
+const productionRedirect = "https://master.d29thsukvcvws1.amplifyapp.com/";
 
 const updatedAwsConfig = {
     ...awsExports,
