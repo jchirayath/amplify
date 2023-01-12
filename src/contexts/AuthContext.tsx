@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { CognitoHostedUIIdentityProvider } from "@aws-amplify/auth";
 import { Auth, Hub } from "aws-amplify";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 export const AuthContext = React.createContext({
     user: null,
@@ -179,6 +180,9 @@ export const AuthProvider = ({ children }: any) => {
         signInWithFacebook,
     };
 
+    if (userLoading) {
+        return <LoadingSpinner />;
+    }
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
