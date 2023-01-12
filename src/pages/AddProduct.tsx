@@ -6,8 +6,9 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
+import { v4 as uuidv4 } from 'uuid';
 import { API } from "aws-amplify";
-import { createProduct } from "../graphql/mutations";
+import { createProducts } from "../graphql/mutations";
 import useAuth from "../hooks/useAuth";
 import {
   FormControl,
@@ -58,6 +59,13 @@ const AddProduct = () => {
     return user?.attributes?.name;
   };
 
+  const getEmail = (user: any): string => {
+    if (user?.attributes?.email === null) {
+      return "";
+    }
+    return user?.attributes?.email;
+  }
+
   useEffect(() => {
     if (user) {
       const name = getName(user);
@@ -87,11 +95,16 @@ const AddProduct = () => {
         ): Promise<void> => {
           try {
             setSubmitting(true);
+            const userEmail = getEmail(user);
+
             // save new product
             const response = await API.graphql({
-              query: createProduct,
+              query: createProducts,
               variables: {
-                input: {
+                createProductsInput: {
+                  id: `${uuidv4()}`,
+                  createdAt: new Date().toISOString(),
+                  updatedAt: new Date().toISOString(),
                   leftWidth: values.leftWidth,
                   leftLength: values.leftLength,
                   leftHeight: values.leftHeight,
@@ -100,6 +113,7 @@ const AddProduct = () => {
                   rightLength: values.rightLength,
                   rightHeight: values.rightHeight,
                   rightLogo: values.rightLogo,
+                  email: userEmail,
                 },
               },
             });
@@ -108,8 +122,9 @@ const AddProduct = () => {
             setSubmitting(false);
             navigate("/");
           } catch (err: any) {
+            console.log("Error adding product: ", err);
             setStatus({ success: false });
-            setErrors({ submit: err.message });
+            setErrors({ submit: err?.errors[0]?.message });
             setSubmitting(false);
           }
         }}

@@ -83,9 +83,17 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
-    "serverlessappd58f5232": {
+    "serverlessappaddproduct": {
       "build": true,
       "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
+          ],
+          "category": "api",
+          "resourceName": "serverlessapp"
+        },
         {
           "attributes": [
             "GraphQLAPIIdOutput",
@@ -172,27 +180,19 @@
         }
       ]
     },
-    "AMPLIFY_function_serverlessappd58f5232_deploymentBucketName": {
+    "AMPLIFY_function_serverlessappaddproduct_deploymentBucketName": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "serverlessappd58f5232"
+          "resourceName": "serverlessappaddproduct"
         }
       ]
     },
-    "AMPLIFY_function_serverlessappd58f5232_s3Key": {
+    "AMPLIFY_function_serverlessappaddproduct_s3Key": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "serverlessappd58f5232"
-        }
-      ]
-    },
-    "AMPLIFY_function_serverlessappd58f5232_userstable": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "serverlessappd58f5232"
+          "resourceName": "serverlessappaddproduct"
         }
       ]
     },

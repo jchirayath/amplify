@@ -28,6 +28,63 @@ export const updateUsers = /* GraphQL */ `
     }
   }
 `;
+export const deleteProducts = /* GraphQL */ `
+  mutation DeleteProducts($id: String!) {
+    deleteProducts(id: $id) {
+      id
+      email
+      leftWidth
+      leftLength
+      leftHeight
+      leftLogo
+      rightWidth
+      rightLength
+      rightHeight
+      rightLogo
+      createdAt
+      updatedAt
+      fileKey
+    }
+  }
+`;
+export const createProducts = /* GraphQL */ `
+  mutation CreateProducts($createProductsInput: CreateProductsInput!) {
+    createProducts(createProductsInput: $createProductsInput) {
+      id
+      email
+      leftWidth
+      leftLength
+      leftHeight
+      leftLogo
+      rightWidth
+      rightLength
+      rightHeight
+      rightLogo
+      createdAt
+      updatedAt
+      fileKey
+    }
+  }
+`;
+export const updateProducts = /* GraphQL */ `
+  mutation UpdateProducts($updateProductsInput: UpdateProductsInput!) {
+    updateProducts(updateProductsInput: $updateProductsInput) {
+      id
+      email
+      leftWidth
+      leftLength
+      leftHeight
+      leftLogo
+      rightWidth
+      rightLength
+      rightHeight
+      rightLogo
+      createdAt
+      updatedAt
+      fileKey
+    }
+  }
+`;
 export const createProduct = /* GraphQL */ `
   mutation CreateProduct(
     $input: CreateProductInput!
@@ -43,6 +100,7 @@ export const createProduct = /* GraphQL */ `
       rightLength
       rightHeight
       rightLogo
+      email
       fileKey
       createdAt
       updatedAt
@@ -67,6 +125,7 @@ export const updateProduct = /* GraphQL */ `
       rightLength
       rightHeight
       rightLogo
+      email
       fileKey
       createdAt
       updatedAt
@@ -91,6 +150,7 @@ export const deleteProduct = /* GraphQL */ `
       rightLength
       rightHeight
       rightLogo
+      email
       fileKey
       createdAt
       updatedAt

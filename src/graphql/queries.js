@@ -19,6 +19,44 @@ export const listUserss = /* GraphQL */ `
     }
   }
 `;
+export const getProducts = /* GraphQL */ `
+  query GetProducts($id: String!) {
+    getProducts(id: $id) {
+      id
+      email
+      leftWidth
+      leftLength
+      leftHeight
+      leftLogo
+      rightWidth
+      rightLength
+      rightHeight
+      rightLogo
+      createdAt
+      updatedAt
+      fileKey
+    }
+  }
+`;
+export const listProductss = /* GraphQL */ `
+  query ListProductss {
+    listProductss {
+      id
+      email
+      leftWidth
+      leftLength
+      leftHeight
+      leftLogo
+      rightWidth
+      rightLength
+      rightHeight
+      rightLogo
+      createdAt
+      updatedAt
+      fileKey
+    }
+  }
+`;
 export const getProduct = /* GraphQL */ `
   query GetProduct($id: ID!) {
     getProduct(id: $id) {
@@ -31,6 +69,7 @@ export const getProduct = /* GraphQL */ `
       rightLength
       rightHeight
       rightLogo
+      email
       fileKey
       createdAt
       updatedAt
@@ -57,6 +96,7 @@ export const listProducts = /* GraphQL */ `
         rightLength
         rightHeight
         rightLogo
+        email
         fileKey
         createdAt
         updatedAt
@@ -92,6 +132,7 @@ export const syncProducts = /* GraphQL */ `
         rightLength
         rightHeight
         rightLogo
+        email
         fileKey
         createdAt
         updatedAt

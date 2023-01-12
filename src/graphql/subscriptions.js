@@ -10,6 +10,25 @@ export const onCreateUsers = /* GraphQL */ `
     }
   }
 `;
+export const onCreateProducts = /* GraphQL */ `
+  subscription OnCreateProducts {
+    onCreateProducts {
+      id
+      email
+      leftWidth
+      leftLength
+      leftHeight
+      leftLogo
+      rightWidth
+      rightLength
+      rightHeight
+      rightLogo
+      createdAt
+      updatedAt
+      fileKey
+    }
+  }
+`;
 export const onCreateProduct = /* GraphQL */ `
   subscription OnCreateProduct($filter: ModelSubscriptionProductFilterInput) {
     onCreateProduct(filter: $filter) {
@@ -22,6 +41,7 @@ export const onCreateProduct = /* GraphQL */ `
       rightLength
       rightHeight
       rightLogo
+      email
       fileKey
       createdAt
       updatedAt
@@ -43,6 +63,7 @@ export const onUpdateProduct = /* GraphQL */ `
       rightLength
       rightHeight
       rightLogo
+      email
       fileKey
       createdAt
       updatedAt
@@ -64,6 +85,7 @@ export const onDeleteProduct = /* GraphQL */ `
       rightLength
       rightHeight
       rightLogo
+      email
       fileKey
       createdAt
       updatedAt

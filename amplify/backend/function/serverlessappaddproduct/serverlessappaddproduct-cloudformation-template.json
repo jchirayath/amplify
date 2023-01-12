@@ -16,9 +16,6 @@
     "s3Key": {
       "Type": "String"
     },
-    "userstable": {
-      "Type": "String"
-    },
     "apiserverlessappGraphQLAPIIdOutput": {
       "Type": "String",
       "Default": "apiserverlessappGraphQLAPIIdOutput"
@@ -62,12 +59,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "serverlessappd58f5232",
+            "serverlessappaddproduct",
             {
               "Fn::Join": [
                 "",
                 [
-                  "serverlessappd58f5232",
+                  "serverlessappaddproduct",
                   "-",
                   {
                     "Ref": "env"
@@ -93,9 +90,6 @@
             },
             "API_SERVERLESSAPP_GRAPHQLAPIKEYOUTPUT": {
               "Ref": "apiserverlessappGraphQLAPIKeyOutput"
-            },
-            "USERSTABLE": {
-              "Ref": "userstable"
             }
           }
         },
@@ -116,12 +110,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "serverlessappLambdaRole9834a757",
+            "serverlessappLambdaRole79609db6",
             {
               "Fn::Join": [
                 "",
                 [
-                  "serverlessappLambdaRole9834a757",
+                  "serverlessappLambdaRole79609db6",
                   "-",
                   {
                     "Ref": "env"
@@ -277,6 +271,62 @@
             }
           ]
         }
+      }
+    },
+    "LambdaTriggerPolicyProduct": {
+      "DependsOn": [
+        "LambdaExecutionRole"
+      ],
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyName": "amplify-lambda-execution-policy-Product",
+        "Roles": [
+          {
+            "Ref": "LambdaExecutionRole"
+          }
+        ],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "dynamodb:DescribeStream",
+                "dynamodb:GetRecords",
+                "dynamodb:GetShardIterator",
+                "dynamodb:ListStreams"
+              ],
+              "Resource": {
+                "Fn::ImportValue": {
+                  "Fn::Sub": "${apiserverlessappGraphQLAPIIdOutput}:GetAtt:ProductTable:StreamArn"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "LambdaEventSourceMappingProduct": {
+      "Type": "AWS::Lambda::EventSourceMapping",
+      "DependsOn": [
+        "LambdaTriggerPolicyProduct",
+        "LambdaExecutionRole"
+      ],
+      "Properties": {
+        "BatchSize": 100,
+        "Enabled": true,
+        "EventSourceArn": {
+          "Fn::ImportValue": {
+            "Fn::Sub": "${apiserverlessappGraphQLAPIIdOutput}:GetAtt:ProductTable:StreamArn"
+          }
+        },
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "LambdaFunction",
+            "Arn"
+          ]
+        },
+        "StartingPosition": "LATEST"
       }
     }
   },

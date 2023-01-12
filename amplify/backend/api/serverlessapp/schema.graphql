@@ -24,6 +24,7 @@ type Product @model {
   rightLength: Float!
   rightHeight: Float!
   rightLogo: String!
+  email: String
   fileKey: String
 }
 
@@ -37,19 +38,73 @@ type Mutation {
   deleteUsers(id: String!): Users
   createUsers(createUsersInput: CreateUsersInput!): Users
   updateUsers(updateUsersInput: UpdateUsersInput!): Users
+  deleteProducts(id: String!): Products
+  createProducts(createProductsInput: CreateProductsInput!): Products
+  updateProducts(updateProductsInput: UpdateProductsInput!): Products
 }
 
 type Query {
   getUsers(id: String!): Users
   listUserss: [Users]
+  getProducts(id: String!): Products
+  listProductss: [Products]
 }
 
 type Subscription {
   onCreateUsers: Users @aws_subscribe(mutations: ["createUsers"])
+  onCreateProducts: Products @aws_subscribe(mutations: ["createProducts"])
 }
 
 schema {
   query: Query
   mutation: Mutation
   subscription: Subscription
+}
+
+input CreateProductsInput {
+  id: String!
+  email: String!
+  leftWidth: Float!
+  leftLength: Float!
+  leftHeight: Float!
+  leftLogo: String!
+  rightWidth: Float!
+  rightLength: Float!
+  rightHeight: Float!
+  rightLogo: String!
+  createdAt: String!
+  updatedAt: String!
+  fileKey: String
+}
+
+type Products {
+  id: String!
+  email: String!
+  leftWidth: Float!
+  leftLength: Float!
+  leftHeight: Float!
+  leftLogo: String!
+  rightWidth: Float!
+  rightLength: Float!
+  rightHeight: Float!
+  rightLogo: String!
+  createdAt: String!
+  updatedAt: String!
+  fileKey: String
+}
+
+input UpdateProductsInput {
+  id: String!
+  email: String
+  leftWidth: Float
+  leftLength: Float
+  leftHeight: Float
+  leftLogo: String
+  rightWidth: Float
+  rightLength: Float
+  rightHeight: Float
+  rightLogo: String
+  createdAt: String
+  updatedAt: String
+  fileKey: String
 }

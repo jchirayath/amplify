@@ -20,6 +20,42 @@ export declare type Users = LazyLoading extends LazyLoadingDisabled ? EagerUsers
 
 export declare const Users: (new (init: ModelInit<Users>) => Users)
 
+type EagerProducts = {
+  readonly id: string;
+  readonly email: string;
+  readonly leftWidth: number;
+  readonly leftLength: number;
+  readonly leftHeight: number;
+  readonly leftLogo: string;
+  readonly rightWidth: number;
+  readonly rightLength: number;
+  readonly rightHeight: number;
+  readonly rightLogo: string;
+  readonly createdAt: string;
+  readonly updatedAt: string;
+  readonly fileKey?: string | null;
+}
+
+type LazyProducts = {
+  readonly id: string;
+  readonly email: string;
+  readonly leftWidth: number;
+  readonly leftLength: number;
+  readonly leftHeight: number;
+  readonly leftLogo: string;
+  readonly rightWidth: number;
+  readonly rightLength: number;
+  readonly rightHeight: number;
+  readonly rightLogo: string;
+  readonly createdAt: string;
+  readonly updatedAt: string;
+  readonly fileKey?: string | null;
+}
+
+export declare type Products = LazyLoading extends LazyLoadingDisabled ? EagerProducts : LazyProducts
+
+export declare const Products: (new (init: ModelInit<Products>) => Products)
+
 type EagerProduct = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<Product, 'id'>;
@@ -34,6 +70,7 @@ type EagerProduct = {
   readonly rightLength: number;
   readonly rightHeight: number;
   readonly rightLogo: string;
+  readonly email?: string | null;
   readonly fileKey?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
@@ -53,6 +90,7 @@ type LazyProduct = {
   readonly rightLength: number;
   readonly rightHeight: number;
   readonly rightLogo: string;
+  readonly email?: string | null;
   readonly fileKey?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
