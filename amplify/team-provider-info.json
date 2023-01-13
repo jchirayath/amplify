@@ -26,7 +26,7 @@
         },
         "serverlessappaddproduct": {
           "deploymentBucketName": "amplify-serverlessapp-dev-232533-deployment",
-          "s3Key": "amplify-builds/serverlessappaddproduct-7371565352776c33746b-build.zip"
+          "s3Key": "amplify-builds/serverlessappaddproduct-3752726d784b4f343864-build.zip"
         }
       },
       "api": {
@@ -42,6 +42,9 @@
           "appId": "d29thsukvcvws1",
           "type": "manual"
         }
+      },
+      "storage": {
+        "demoapps3": {}
       }
     }
   }

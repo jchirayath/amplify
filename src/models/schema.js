@@ -35,7 +35,7 @@ export const schema = {
                     "name": "leftLogo",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 },
                 "rightWidth": {
@@ -233,5 +233,5 @@ export const schema = {
         }
     },
     "codegenVersion": "3.3.4",
-    "version": "0a7f65dbcb07cc75e462041a66102440"
+    "version": "c78a0c437ea17444c86a1c785983d723"
 };

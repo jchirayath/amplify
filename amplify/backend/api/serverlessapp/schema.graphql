@@ -19,7 +19,7 @@ type Product @model {
   leftWidth: Float!
   leftLength: Float!
   leftHeight: Float!
-  leftLogo: String!
+  leftLogo: String
   rightWidth: Float!
   rightLength: Float!
   rightHeight: Float!

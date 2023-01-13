@@ -22,6 +22,7 @@ export interface Product {
   rightHeight: number;
   leftLogo: string;
   rightLogo: string;
+  fileKey: string;
 }
 const Dashboard = () => {
   const [products, setProducts] = React.useState<Product[]>([]);
@@ -41,6 +42,7 @@ const Dashboard = () => {
           rightHeight: fProduct.rightHeight,
           leftLogo: fProduct.leftLogo,
           rightLogo: fProduct.rightLogo,
+          fileKey: fProduct.fileKey? fProduct.fileKey : "",
         });
       }
     })();
@@ -53,9 +55,7 @@ const Dashboard = () => {
     // map response list to products array
 
     // set products
-    const mappedProducts = await mapProducts(
-      allProducts?.data?.listProductss
-    );
+    const mappedProducts = await mapProducts(allProducts?.data?.listProductss);
     setProducts(mappedProducts);
   };
 

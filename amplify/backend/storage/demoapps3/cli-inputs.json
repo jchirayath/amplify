@@ -1,0 +1,14 @@
+{
+  "resourceName": "demoapps3",
+  "policyUUID": "7d3fe65a",
+  "bucketName": "serverlessapp37cb75d570144ee780544e81751d5150",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

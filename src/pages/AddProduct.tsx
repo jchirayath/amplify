@@ -6,8 +6,8 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
-import { v4 as uuidv4 } from 'uuid';
-import { API } from "aws-amplify";
+import { v4 as uuidv4 } from "uuid";
+import { API, Storage } from "aws-amplify";
 import { createProducts } from "../graphql/mutations";
 import useAuth from "../hooks/useAuth";
 import {
@@ -22,13 +22,34 @@ import { Formik } from "formik";
 import { useEffect } from "react";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { FileUpload, FileUploadProps } from "../components/FileUpload";
 
 const AddProduct = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const [file, setFile] = React.useState<File | null>(null);
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
+
+  const fileUploadProp: FileUploadProps = {
+    accept: "image/*",
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (event.target.files !== null && event.target?.files?.length > 0) {
+        console.log(`Saving ${event.target.value}`);
+        setFile(event.target.files[0]);
+      }
+    },
+    onDrop: (event: React.DragEvent<HTMLElement>) => {
+      if (
+        event.dataTransfer.files !== null &&
+        event.dataTransfer.files.length > 0
+      ) {
+        console.log(`Drop ${event.dataTransfer.files[0].name}`);
+        setFile(event.dataTransfer.files[0]);
+      }
+    },
+  };
 
   const validationSchema = Yup.object({
     leftWidth: Yup.number()
@@ -64,7 +85,7 @@ const AddProduct = () => {
       return "";
     }
     return user?.attributes?.email;
-  }
+  };
 
   useEffect(() => {
     if (user) {
@@ -96,13 +117,29 @@ const AddProduct = () => {
           try {
             setSubmitting(true);
             const userEmail = getEmail(user);
+            const productId = uuidv4();
+            let productFileName = "";
+
+            console.log(`File: ${file?.name}`);
+            // if it has product file save it to s3
+            if (file) {
+              productFileName = `${productId}-${file.name}`;
+              const fileUploadResponse = await Storage.put(
+                productFileName,
+                file,
+                {
+                  contentType: file?.type,
+                }
+              );
+              console.log(`File upload response: ${fileUploadResponse}`);
+            }
 
             // save new product
             const response = await API.graphql({
               query: createProducts,
               variables: {
                 createProductsInput: {
-                  id: `${uuidv4()}`,
+                  id: productId,
                   createdAt: new Date().toISOString(),
                   updatedAt: new Date().toISOString(),
                   leftWidth: values.leftWidth,
@@ -113,6 +150,7 @@ const AddProduct = () => {
                   rightLength: values.rightLength,
                   rightHeight: values.rightHeight,
                   rightLogo: values.rightLogo,
+                  fileKey: productFileName,
                   email: userEmail,
                 },
               },
@@ -340,41 +378,53 @@ const AddProduct = () => {
                 </FormControl>
               </Grid>
               <Grid item xs={12}>
-                {/*Display Error with Icon*/}
-                {errors?.submit && (
-                    <Box
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                        }}
-                    >
-                      <ErrorOutlineIcon sx={{ color: "red", mr: 1 }} />
-                      <Typography variant="body2" color="error">
-                        {errors?.submit}
-                      </Typography>
-                    </Box>
-                )}
+                <Grid container>
+                  <FileUpload {...fileUploadProp} />
+                </Grid>
               </Grid>
-              <Grid item xs={12} sx={{
-                justifyContent: "center"
-              }}>
-                {/*Display Error with Icon*/}
-                {status?.success && (
-                    <Box
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                        }}
-                    >
-                      <CheckCircleOutlineIcon sx={{ color: "green", mr: 1 }} />
-                      <Typography variant="body2"  sx={{
+              {/*Display Error with Icon*/}
+              {errors?.submit && (
+                <Grid item xs={12}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <ErrorOutlineIcon sx={{ color: "red", mr: 1 }} />
+                    <Typography variant="body2" color="error">
+                      {errors?.submit}
+                    </Typography>
+                  </Box>
+                </Grid>
+              )}
+              {/*Display Error with Icon*/}
+              {status?.success && (
+                <Grid
+                  item
+                  xs={12}
+                  sx={{
+                    justifyContent: "center",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <CheckCircleOutlineIcon sx={{ color: "green", mr: 1 }} />
+                    <Typography
+                      variant="body2"
+                      sx={{
                         color: "green",
-                      }}>
-                        New product added successfully.
-                      </Typography>
-                    </Box>
-                )}
-              </Grid>
+                      }}
+                    >
+                      New product added successfully.
+                    </Typography>
+                  </Box>
+                </Grid>
+              )}
               <Grid item xs={12}>
                 <Box sx={{ display: "flex", justifyContent: "center" }}>
                   <Button

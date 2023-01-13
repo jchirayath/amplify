@@ -65,7 +65,7 @@ type EagerProduct = {
   readonly leftWidth: number;
   readonly leftLength: number;
   readonly leftHeight: number;
-  readonly leftLogo: string;
+  readonly leftLogo?: string | null;
   readonly rightWidth: number;
   readonly rightLength: number;
   readonly rightHeight: number;
@@ -85,7 +85,7 @@ type LazyProduct = {
   readonly leftWidth: number;
   readonly leftLength: number;
   readonly leftHeight: number;
-  readonly leftLogo: string;
+  readonly leftLogo?: string | null;
   readonly rightWidth: number;
   readonly rightLength: number;
   readonly rightHeight: number;
