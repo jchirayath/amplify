@@ -48,6 +48,7 @@ type Query {
   listUserss: [Users]
   getProducts(id: String!): Products
   listProductss: [Products]
+  listProductsByUser(ownerId: String!): [Products]
 }
 
 type Subscription {
@@ -75,6 +76,7 @@ input CreateProductsInput {
   createdAt: String!
   updatedAt: String!
   fileKey: String
+  ownerId: String!
 }
 
 type Products {
@@ -91,6 +93,7 @@ type Products {
   createdAt: String!
   updatedAt: String!
   fileKey: String
+  ownerId: String!
 }
 
 input UpdateProductsInput {
@@ -107,4 +110,5 @@ input UpdateProductsInput {
   createdAt: String
   updatedAt: String
   fileKey: String
+  ownerId: String
 }

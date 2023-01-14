@@ -44,6 +44,7 @@ export const deleteProducts = /* GraphQL */ `
       createdAt
       updatedAt
       fileKey
+      ownerId
     }
   }
 `;
@@ -63,6 +64,7 @@ export const createProducts = /* GraphQL */ `
       createdAt
       updatedAt
       fileKey
+      ownerId
     }
   }
 `;
@@ -82,6 +84,7 @@ export const updateProducts = /* GraphQL */ `
       createdAt
       updatedAt
       fileKey
+      ownerId
     }
   }
 `;

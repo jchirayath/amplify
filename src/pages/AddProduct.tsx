@@ -87,6 +87,13 @@ const AddProduct = () => {
     return user?.attributes?.email;
   };
 
+  const getUsername = (user: any): string => {
+    if (user?.username === null) {
+      return "";
+    }
+    return user?.username;
+  }
+
   useEffect(() => {
     if (user) {
       const name = getName(user);
@@ -117,6 +124,9 @@ const AddProduct = () => {
           try {
             setSubmitting(true);
             const userEmail = getEmail(user);
+            const ownerId = getUsername(user);
+            console.log('User Email: ', userEmail);
+            console.log('Owner Id: ', ownerId);
             const productId = uuidv4();
             let productFileName = "";
 
@@ -150,6 +160,7 @@ const AddProduct = () => {
                   rightLength: values.rightLength,
                   rightHeight: values.rightHeight,
                   rightLogo: values.rightLogo,
+                  ownerId: ownerId,
                   fileKey: productFileName,
                   email: userEmail,
                 },
@@ -216,7 +227,7 @@ const AddProduct = () => {
                   <b>Left</b>
                 </Typography>
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={3}>
                 <TextField
                   required
                   value={values?.leftWidth}
@@ -231,7 +242,7 @@ const AddProduct = () => {
                   variant="standard"
                 />
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={3}>
                 <TextField
                   required
                   value={values?.leftLength}
@@ -246,7 +257,7 @@ const AddProduct = () => {
                   variant="standard"
                 />
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={3}>
                 <TextField
                   required
                   value={values?.leftHeight}
@@ -261,7 +272,7 @@ const AddProduct = () => {
                   variant="standard"
                 />
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={3}>
                 <FormControl fullWidth>
                   <InputLabel id="left-logo-select-label">Left Logo</InputLabel>
                   <Select
@@ -298,7 +309,7 @@ const AddProduct = () => {
                   <b>Right</b>
                 </Typography>
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={3}>
                 <TextField
                   required
                   value={values?.rightWidth}
@@ -313,7 +324,7 @@ const AddProduct = () => {
                   variant="standard"
                 />
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={3}>
                 <TextField
                   required
                   value={values?.rightLength}
@@ -328,7 +339,7 @@ const AddProduct = () => {
                   variant="standard"
                 />
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={3}>
                 <TextField
                   required
                   value={values?.rightHeight}
@@ -343,7 +354,7 @@ const AddProduct = () => {
                   variant="standard"
                 />
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={3}>
                 <FormControl fullWidth>
                   <InputLabel id="right-logo-select-label">
                     Right Logo

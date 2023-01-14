@@ -35,6 +35,7 @@ export const getProducts = /* GraphQL */ `
       createdAt
       updatedAt
       fileKey
+      ownerId
     }
   }
 `;
@@ -54,6 +55,27 @@ export const listProductss = /* GraphQL */ `
       createdAt
       updatedAt
       fileKey
+      ownerId
+    }
+  }
+`;
+export const listProductsByUser = /* GraphQL */ `
+  query ListProductsByUser($ownerId: String!) {
+    listProductsByUser(ownerId: $ownerId) {
+      id
+      email
+      leftWidth
+      leftLength
+      leftHeight
+      leftLogo
+      rightWidth
+      rightLength
+      rightHeight
+      rightLogo
+      createdAt
+      updatedAt
+      fileKey
+      ownerId
     }
   }
 `;

@@ -25,7 +25,7 @@ const ProductsTable = ({ products }: ProductsTableProps) => {
   const fetchFileFromS3 = async (key: string) => {
     try {
       const fileUrl = await Storage.get(key, { level: "public" });
-        window.open(fileUrl);
+      window.open(fileUrl);
       console.log("File URL: ", fileUrl);
     } catch (error) {
       console.log(error);
@@ -145,10 +145,12 @@ const ProductsTable = ({ products }: ProductsTableProps) => {
                 <TableCell align="center">{product.rightLogo}</TableCell>
                 <TableCell align="center">
                   {product.fileKey !== "" && (
-                    <IconButton aria-label="delete">
-                      <FileDownloadIcon
-                        onClick={() => fetchFileFromS3(product.fileKey)}
-                      />
+                    <IconButton
+                      type="button"
+                      onClick={() => fetchFileFromS3(product.fileKey)}
+                      aria-label="delete"
+                    >
+                      <FileDownloadIcon />
                     </IconButton>
                   )}
                 </TableCell>

@@ -26,6 +26,7 @@ export const onCreateProducts = /* GraphQL */ `
       createdAt
       updatedAt
       fileKey
+      ownerId
     }
   }
 `;

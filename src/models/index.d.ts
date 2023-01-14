@@ -34,6 +34,7 @@ type EagerProducts = {
   readonly createdAt: string;
   readonly updatedAt: string;
   readonly fileKey?: string | null;
+  readonly ownerId: string;
 }
 
 type LazyProducts = {
@@ -50,6 +51,7 @@ type LazyProducts = {
   readonly createdAt: string;
   readonly updatedAt: string;
   readonly fileKey?: string | null;
+  readonly ownerId: string;
 }
 
 export declare type Products = LazyLoading extends LazyLoadingDisabled ? EagerProducts : LazyProducts

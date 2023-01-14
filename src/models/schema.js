@@ -228,10 +228,17 @@ export const schema = {
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
+                },
+                "ownerId": {
+                    "name": "ownerId",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
                 }
             }
         }
     },
     "codegenVersion": "3.3.4",
-    "version": "c78a0c437ea17444c86a1c785983d723"
+    "version": "15a77a952994d555263150dd26335b6e"
 };

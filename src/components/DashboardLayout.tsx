@@ -13,7 +13,7 @@ import Badge from "@mui/material/Badge";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { MainListItems, secondaryListItems } from "./ListItems";
+import { MainListItems } from "./ListItems";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { Menu, MenuItem, Tooltip } from "@mui/material";
 import { useEffect, useState } from "react";
@@ -135,7 +135,7 @@ const DashboardLayout = () => {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Dashboard
+              Demo App
             </Typography>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
@@ -168,9 +168,9 @@ const DashboardLayout = () => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                <MenuItem onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">Profile Settings</Typography>
-                </MenuItem>
+                {/*<MenuItem onClick={handleCloseUserMenu}>*/}
+                {/*  <Typography textAlign="center">Profile Settings</Typography>*/}
+                {/*</MenuItem>*/}
                 <MenuItem key="sign-out" onClick={handleLogout}>
                   <Typography textAlign="center">Log Out</Typography>
                 </MenuItem>
@@ -187,15 +187,15 @@ const DashboardLayout = () => {
               px: [1],
             }}
           >
-            <IconButton onClick={toggleDrawer}>
+            <IconButton type="button" onClick={toggleDrawer}>
               <ChevronLeftIcon />
             </IconButton>
           </Toolbar>
           <Divider />
           <List component="nav">
             <MainListItems />
-            <Divider sx={{ my: 1 }} />
-            {secondaryListItems}
+            {/*<Divider sx={{ my: 1 }} />*/}
+            {/*{secondaryListItems}*/}
           </List>
         </Drawer>
         <Box
