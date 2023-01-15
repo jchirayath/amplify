@@ -21,6 +21,7 @@ import Avatar from "@mui/material/Avatar";
 import useAuth from "../hooks/useAuth";
 import Dashboard from "../pages/Dashboard";
 import AddProduct from "../pages/AddProduct";
+import LoadingSpinner from "./LoadingSpinner";
 
 const drawerWidth: number = 240;
 
@@ -104,8 +105,8 @@ const DashboardLayout = () => {
     }
   }, [user, userLoading]);
 
-  if (userLoading) {
-    return <div>Loading...</div>;
+  if (userLoading || user === null) {
+    return <LoadingSpinner />;
   } else {
     return (
       <Box sx={{ display: "flex" }}>

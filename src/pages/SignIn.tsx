@@ -19,7 +19,7 @@ import { Formik } from "formik";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import {useEffect} from "react";
+import { useEffect } from "react";
 
 export default function SignIn() {
   const navigate = useNavigate();

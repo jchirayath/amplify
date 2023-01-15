@@ -37,12 +37,6 @@
           "rdsDatabaseName": "DemoDatabase"
         }
       },
-      "hosting": {
-        "amplifyhosting": {
-          "appId": "d29thsukvcvws1",
-          "type": "manual"
-        }
-      },
       "storage": {
         "demoapps3": {}
       }

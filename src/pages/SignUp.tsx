@@ -27,7 +27,14 @@ export default function SignUp() {
   const [confirmMode, setConfirmMode] = React.useState(false);
 
   const navigate = useNavigate();
-  const { signUp, user, unverifiedAccount, confirmAccount } = useAuth();
+  const {
+    signUp,
+    user,
+    unverifiedAccount,
+    confirmAccount,
+    signInWithGoogle,
+    signInWithFacebook,
+  } = useAuth();
 
   const validationSchema = Yup.object({
     email: Yup.string()
@@ -327,6 +334,7 @@ export default function SignUp() {
         <Button
           type="button"
           fullWidth
+          onClick={signInWithGoogle}
           variant="contained"
           sx={{
             backgroundColor: "white",
@@ -346,6 +354,7 @@ export default function SignUp() {
           type="button"
           fullWidth
           variant="contained"
+          onClick={signInWithFacebook}
           sx={{
             backgroundColor: "#1877F2",
             my: 2,
