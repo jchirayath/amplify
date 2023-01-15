@@ -53,23 +53,23 @@ const AddProduct = () => {
 
   const validationSchema = Yup.object({
     leftWidth: Yup.number()
-      .min(7.5, "Width should be positive.")
+      .min(-7.5, "Width should be positive.")
       .required("Left Width is required"),
     leftLength: Yup.number()
-      .min(7.5, "Length should be positive.")
+      .min(-7.5, "Length should be positive.")
       .required("Left Length is required"),
     leftHeight: Yup.number()
-      .min(7.5, "Height should be positive.")
+      .min(-7.5, "Height should be positive.")
       .required("Left Height is required"),
     leftLogo: Yup.string().required("Logo is required"),
     rightWidth: Yup.number()
-      .min(7.5, "Width should be positive.")
+      .min(-7.5, "Width should be positive.")
       .required("Right Width is required"),
     rightLength: Yup.number()
-      .min(7.5, "Length should be positive.")
+      .min(-7.5, "Length should be positive.")
       .required("Right Length is required"),
     rightHeight: Yup.number()
-      .min(7.5, "Height should be positive.")
+      .min(-7.5, "Height should be positive.")
       .required("Right Height is required"),
     rightLogo: Yup.string().required("Logo is required"),
   });
