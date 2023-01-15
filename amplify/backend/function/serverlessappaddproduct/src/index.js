@@ -26,34 +26,30 @@ const SES = new AWS.SES({ region: "us-east-1" });
  */
 exports.handler = async (event) => {
   console.log(`EVENT: ${JSON.stringify(event)}`);
-  for (const record of event.Records) {
-    console.log(record.eventID);
-    console.log(record.eventName);
-    console.log('DynamoDB Record: %j', record.dynamodb);
 
-    if(record.eventName === 'INSERT') {
-      const receiverEmail = record.dynamodb.NewImage.email.S;
+  console.log("Product Record: ", event?.createProductsInput);
 
-      const res = await SES.sendEmail({
-        Source: "devsahan.info@gmail.com",
-        Destination: {
-          ToAddresses: [receiverEmail],
+  const receiverEmail = event?.createProductsInput?.email;
+  console.log("receiverEmail: ", receiverEmail);
+
+  const res = await SES.sendEmail({
+    Source: "devsahan.info@gmail.com",
+    Destination: {
+      ToAddresses: [receiverEmail],
+    },
+    Message: {
+      Body: {
+        Text: {
+          Charset: "UTF-8",
+          Data: `New product has been added to your account.`,
         },
-        Message: {
-          Body: {
-            Text: {
-              Charset: "UTF-8",
-              Data: `New product has been added to your account.`,
-            },
-          },
-          Subject: {
-            Charset: "UTF-8",
-            Data: `DemoApp - New Product Added`,
-          },
-        },
-      }).promise();
-      console.log("res", res);
-    }
-  }
-  return { status: 'done' }
+      },
+      Subject: {
+        Charset: "UTF-8",
+        Data: `DemoApp - New Product Added`,
+      },
+    },
+  }).promise();
+  console.log("res", res);
+  return event?.createProductsInput;
 };

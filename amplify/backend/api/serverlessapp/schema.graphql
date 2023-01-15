@@ -14,20 +14,6 @@ type Users {
   email: String!
 }
 
-type Product @model {
-  id: ID!
-  leftWidth: Float!
-  leftLength: Float!
-  leftHeight: Float!
-  leftLogo: String
-  rightWidth: Float!
-  rightLength: Float!
-  rightHeight: Float!
-  rightLogo: String!
-  email: String
-  fileKey: String
-}
-
 input UpdateUsersInput {
   id: String!
   name: String

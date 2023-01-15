@@ -1,4 +1,4 @@
-import { ModelInit, MutableModel, __modelMeta__, ManagedIdentifier } from "@aws-amplify/datastore";
+import { ModelInit, MutableModel } from "@aws-amplify/datastore";
 // @ts-ignore
 import { LazyLoading, LazyLoadingDisabled } from "@aws-amplify/datastore";
 
@@ -58,48 +58,3 @@ export declare type Products = LazyLoading extends LazyLoadingDisabled ? EagerPr
 
 export declare const Products: (new (init: ModelInit<Products>) => Products)
 
-type EagerProduct = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<Product, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly leftWidth: number;
-  readonly leftLength: number;
-  readonly leftHeight: number;
-  readonly leftLogo?: string | null;
-  readonly rightWidth: number;
-  readonly rightLength: number;
-  readonly rightHeight: number;
-  readonly rightLogo: string;
-  readonly email?: string | null;
-  readonly fileKey?: string | null;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-type LazyProduct = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<Product, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly leftWidth: number;
-  readonly leftLength: number;
-  readonly leftHeight: number;
-  readonly leftLogo?: string | null;
-  readonly rightWidth: number;
-  readonly rightLength: number;
-  readonly rightHeight: number;
-  readonly rightLogo: string;
-  readonly email?: string | null;
-  readonly fileKey?: string | null;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-export declare type Product = LazyLoading extends LazyLoadingDisabled ? EagerProduct : LazyProduct
-
-export declare const Product: (new (init: ModelInit<Product>) => Product) & {
-  copyOf(source: Product, mutator: (draft: MutableModel<Product>) => MutableModel<Product> | void): Product;
-}
