@@ -227,7 +227,7 @@ const AddProduct = () => {
                   id="email"
                   disabled
                   name="email"
-                  value={email}
+                  value={userEmail}
                   label="e-mail"
                   fullWidth
                   variant="outlined"
