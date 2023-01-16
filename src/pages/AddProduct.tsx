@@ -285,7 +285,6 @@ const AddProduct = () => {
                   variant="standard"
                 />
               </Grid>
-              {/*
               <Grid item xs={3}>
                 <FormControl fullWidth>
                   <InputLabel id="left-logo-select-label">Left Logo</InputLabel>
@@ -294,7 +293,7 @@ const AddProduct = () => {
                     variant="outlined"
                     name="leftLogo"
                     id="leftLogo"
-                    label="Left Logo"
+                    label="ADD"
                     value={values?.leftLogo ? values?.leftLogo : ""}
                     onChange={handleChange}
                     error={Boolean(touched.leftLogo && errors.leftLogo)}
@@ -318,7 +317,6 @@ const AddProduct = () => {
                   )}
                 </FormControl>
               </Grid>
-              */}
               <Grid item xs={12}>
                 <Typography variant="body1" gutterBottom>
                   <b>SPH O.S.</b>
@@ -369,7 +367,6 @@ const AddProduct = () => {
                   variant="standard"
                 />
               </Grid>
-              {/*
               <Grid item xs={3}>
                 <FormControl fullWidth>
                   <InputLabel id="right-logo-select-label">
@@ -380,7 +377,7 @@ const AddProduct = () => {
                     variant="outlined"
                     name="rightLogo"
                     id="rightLogo"
-                    label="Right Logo"
+                    label="ADD"
                     value={values?.rightLogo ? values?.rightLogo : ""}
                     onChange={handleChange}
                     error={Boolean(touched.rightLogo && errors.rightLogo)}
@@ -404,7 +401,6 @@ const AddProduct = () => {
                   )}
                 </FormControl>
               </Grid>
-              */}
               <Grid item xs={12}>
                 <Grid container>
                   <FileUpload {...fileUploadProp} />
