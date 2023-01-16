@@ -222,6 +222,17 @@ const AddProduct = () => {
                   variant="outlined"
                 />
               </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  id="email"
+                  disabled
+                  name="email"
+                  value={email}
+                  label="e-mail"
+                  fullWidth
+                  variant="outlined"
+                />
+              </Grid>
               <Grid item xs={12}>
                 <Typography variant="body1" gutterBottom>
                   <b>Left</b>
