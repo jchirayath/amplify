@@ -222,6 +222,7 @@ const AddProduct = () => {
                   variant="outlined"
                 />
               </Grid>
+              {/*
               <Grid item xs={12} sm={6}>
                 <TextField
                   id="email"
@@ -233,6 +234,7 @@ const AddProduct = () => {
                   variant="outlined"
                 />
               </Grid>
+              */}
               <Grid item xs={12}>
                 <Typography variant="body1" gutterBottom>
                   <b>SPH O.D.</b>
@@ -319,7 +321,7 @@ const AddProduct = () => {
               */}
               <Grid item xs={12}>
                 <Typography variant="body1" gutterBottom>
-                  <b>Right</b>
+                  <b>SPH O.S.</b>
                 </Typography>
               </Grid>
               <Grid item xs={3}>
