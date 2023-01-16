@@ -227,7 +227,7 @@ const AddProduct = () => {
                   id="email"
                   disabled
                   name="email"
-                  value={userEmail}
+                  value={getEmail}
                   label="e-mail"
                   fullWidth
                   variant="outlined"
@@ -235,7 +235,7 @@ const AddProduct = () => {
               </Grid>
               <Grid item xs={12}>
                 <Typography variant="body1" gutterBottom>
-                  <b>Left</b>
+                  <b>SPH O.D.</b>
                 </Typography>
               </Grid>
               <Grid item xs={3}>
@@ -248,7 +248,7 @@ const AddProduct = () => {
                   type="number"
                   id="leftWidth"
                   name="leftWidth"
-                  label="Left Width"
+                  label="CYL"
                   fullWidth
                   variant="standard"
                 />
@@ -263,7 +263,7 @@ const AddProduct = () => {
                   type="number"
                   id="leftLength"
                   name="leftLength"
-                  label="Left Length"
+                  label="AXIS"
                   fullWidth
                   variant="standard"
                 />
@@ -278,11 +278,12 @@ const AddProduct = () => {
                   type="number"
                   id="leftHeight"
                   name="leftHeight"
-                  label="Left Height"
+                  label="PRISM"
                   fullWidth
                   variant="standard"
                 />
               </Grid>
+              {/*
               <Grid item xs={3}>
                 <FormControl fullWidth>
                   <InputLabel id="left-logo-select-label">Left Logo</InputLabel>
@@ -315,6 +316,7 @@ const AddProduct = () => {
                   )}
                 </FormControl>
               </Grid>
+              */}
               <Grid item xs={12}>
                 <Typography variant="body1" gutterBottom>
                   <b>Right</b>
@@ -330,7 +332,7 @@ const AddProduct = () => {
                   type="number"
                   id="rightWidth"
                   name="rightWidth"
-                  label="Right Width"
+                  label="CYL"
                   fullWidth
                   variant="standard"
                 />
@@ -345,7 +347,7 @@ const AddProduct = () => {
                   type="number"
                   id="rightLength"
                   name="rightLength"
-                  label="Right Length"
+                  label="AXIS"
                   fullWidth
                   variant="standard"
                 />
@@ -360,11 +362,12 @@ const AddProduct = () => {
                   type="number"
                   id="rightHeight"
                   name="rightHeight"
-                  label="Right Height"
+                  label="PRISM"
                   fullWidth
                   variant="standard"
                 />
               </Grid>
+              {/*
               <Grid item xs={3}>
                 <FormControl fullWidth>
                   <InputLabel id="right-logo-select-label">
@@ -399,6 +402,7 @@ const AddProduct = () => {
                   )}
                 </FormControl>
               </Grid>
+              */}
               <Grid item xs={12}>
                 <Grid container>
                   <FileUpload {...fileUploadProp} />
