@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --color-canvas: #F4F7F6;
+  --color-panel: #FBFCFB;
+  --color-ink: #13252A;
+  --color-soft: #4A5A60;
+  --color-faint: #7B8A8F;
+  --color-line: #D3DDDA;
+  --color-brand: #16706A;
+  --color-brand-dark: #0F5852;
+  --color-tint: #DCEDEA;
+  --color-night: #0E2A31;
+  --color-night-2: #1F4C56;
+  --color-on-night: #EEF4F2;
+  --color-on-night-soft: #B6CBC6;
+  --color-accent: #E7A93C;
+  --color-warn-bg: #FBEFD6;
+  --color-warn: #7A4F00;
+  --color-danger-bg: #FDECEA;
+  --color-danger: #B42318;
+
+  --shadow-card: 0 1px 2px rgb(14 42 49 / 0.06), 0 8px 24px rgb(14 42 49 / 0.06);
+  --shadow-pop: 0 24px 64px rgb(14 42 49 / 0.22);
+
+  --animate-flash: flash 900ms ease-out;
+  --animate-rise: rise 220ms ease-out;
+}
+
+@keyframes flash {
+  from { background-color: #F7DFA9; }
+  to { background-color: transparent; }
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+html, body, #root { height: 100%; }
+body {
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+.tnum { font-variant-numeric: tabular-nums; }
+
+:focus-visible { outline: 3px solid color-mix(in srgb, var(--color-brand) 55%, transparent); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* Printing a prescription: only the paper card is printed. */
+@media print {
+  @page { margin: 16mm; }
+  body { background: white; }
+  body * { visibility: hidden; }
+  .print-area, .print-area * { visibility: visible; }
+  .print-area { position: absolute; inset: 0 auto auto 0; width: 100%; box-shadow: none !important; border: none !important; }
+}
