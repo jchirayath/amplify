@@ -10,16 +10,54 @@ account and nothing that can expire mid-pitch, and once loaded it works offline.
 
 ## Run it
 
+You need **Node.js 20.19+ or 22.12+** (Vite 8's minimum). Check with `node -v`. Everything
+runs from the `poc/` folder.
+
+### 1. Get the code
+
 ```bash
+git clone https://github.com/jchirayath/amplify.git
+cd amplify
+git checkout poc/ui-demo     # until this branch is merged
 cd poc
 npm install
-npm run dev        # http://localhost:5173
-npm test           # validation and change-detection rules
-npm run build      # static site in poc/dist
 ```
 
-`dist/` uses relative paths and hash routing, so it can be served from any static host or
-subfolder with no rewrite rules. `npx vite preview` serves the build locally.
+### 2. Develop (live reload)
+
+```bash
+npm run dev                  # http://localhost:5173
+```
+
+### 3. Build and run the production build (use this for a pitch)
+
+```bash
+npm run build                # type-checks, then writes the static site to poc/dist
+npm run preview              # serves poc/dist at http://localhost:4173
+```
+
+Open the printed URL and sign in with the pre-filled demo account. The build is fully static:
+once the page has loaded, it keeps working with the network off.
+
+### 4. Check it
+
+```bash
+npm test                     # unit tests for the validation and change-detection rules
+npm run typecheck            # TypeScript only, no build
+```
+
+### Hosting the build
+
+`dist/` uses relative paths and hash routing (`#/patients/...`), so any static host works,
+including a subfolder, with no rewrite rules. Copy the contents of `poc/dist/` to the host, or
+for a quick local share run `npx serve dist`. Opening `dist/index.html` straight from disk
+(`file://`) is not supported, because browsers block module scripts there; serve it over HTTP.
+
+### Before each pitch
+
+- Run from the production build (step 3), not the dev server.
+- Reset the sample data: Settings → Reset demo data, or ⌘K → "Reset demo data".
+- Data is per browser, so rehearse in the browser you'll present from.
 
 ## The four-minute demo
 

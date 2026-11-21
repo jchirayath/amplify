@@ -5,6 +5,9 @@
   "description": "Front-end-only demo of Amplify Rx: eyeglass prescription capture, history and sharing, on sample data.",
   "license": "MIT",
   "type": "module",
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",

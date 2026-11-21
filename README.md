@@ -12,7 +12,15 @@ supporting Lambda functions, and S3 storage.
 > **New: [`poc/`](poc/README.md)** is a front-end-only UI proof of concept, rebuilt for
 > funding pitches on Vite + React + Tailwind with sample data and a corrected clinical
 > model (SPH added, OD/OS fixed, ADD as a power). It doesn't depend on the Amplify backend.
-> `cd poc && npm install && npm run dev`.
+> Needs Node 20.19+ or 22.12+:
+>
+> ```bash
+> cd poc && npm install
+> npm run dev                        # develop at http://localhost:5173
+> npm run build && npm run preview   # production build at http://localhost:4173
+> ```
+>
+> Full steps, hosting and the demo script are in [`poc/README.md`](poc/README.md#run-it).
 
 ## What it does
 
